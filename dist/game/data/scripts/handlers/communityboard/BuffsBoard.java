@@ -52,9 +52,21 @@ public class BuffsBoard implements IWriteBoardHandler, IParseBoardHandler
 			String html = HtmCache.getInstance().getHtm(activeChar.getHtmlPrefix(), "data/html/CommunityBoard/buffs.html");
 			CommunityBoardHandler.separateAndSend(html, activeChar);
 		} else if (command.equals("_selfbuff")) {
-			int maxLevel = SkillData.getInstance().getMaxLevel(1362);
-			Skill skill = SkillData.getInstance().getSkill(1363, maxLevel);
-			skill.applyEffects(activeChar, activeChar, true, 14400);
+			int[] ids = new int[]{
+				1040, 1068, 1035, 1043, 1044, 1073, 1077, 1078, 1085, 1204, 1032, 1036, 1045, 1048, 1086, 1240, 1242, 1243, 1388, 1389, 1062, 1087, 1059, 1268, 1303, 1460, 1257, 1259, 1304, 1397, 1353,
+				1354, 1355, 1357, 1356, 1191, 1033, 1182, 1189, 1392, 1393, 1352, 271, 272, 273, 274, 275, 276, 277, 307, 309, 310, 311, 365, 366, 530, 264, 265, 266, 267, 268, 269, 270, 304, 305, 306, 308, 349, 363, 364, 529, 1007, 1009, 1002, 1006, 1251, 1252, 1253, 1284, 1308, 1309, 1310, 1362, 1363, 1390, 1391, 1413, 1461, 1003, 1004, 1005, 1008, 1249, 1250, 1260, 1261, 1282, 1364, 1365, 1414, 1415, 1416, 4699, 4700, 4702, 4703, 825, 826, 824, 828, 829, 830
+			};
+
+			for(int i : ids){
+				try {
+					int maxLevel = SkillData.getInstance().getMaxLevel(i);
+					Skill skill = SkillData.getInstance().getSkill(i, maxLevel);
+					skill.applyEffects(activeChar, activeChar, true, 14400);
+				} catch (Exception e) {
+					LOG.info(i + "");
+					LOG.info(e.getMessage());
+				}
+			}
 		} else {
 			CommunityBoardHandler.separateAndSend("<html><body><br><br><center>Command " + command + " need development.</center><br><br></body></html>", activeChar);
 		}
