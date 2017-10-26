@@ -22,6 +22,7 @@ import com.l2jserver.gameserver.cache.HtmCache;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
 import com.l2jserver.gameserver.datatables.SkillData;
 import com.l2jserver.gameserver.handler.CommunityBoardHandler;
+import com.l2jserver.gameserver.handler.IParseBoardHandler;
 import com.l2jserver.gameserver.handler.IWriteBoardHandler;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.skills.Skill;
@@ -30,7 +31,7 @@ import com.l2jserver.gameserver.model.skills.Skill;
  * Buffs board.
  * @author evgeny mokhnachev
  */
-public class BuffsBoard implements IWriteBoardHandler
+public class BuffsBoard implements IWriteBoardHandler, IParseBoardHandler
 {
 	private static final String[] COMMANDS =
 	{
