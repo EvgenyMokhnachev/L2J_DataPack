@@ -18,9 +18,13 @@
  */
 package handlers.communityboard;
 
+import com.l2jserver.gameserver.cache.HtmCache;
+import com.l2jserver.gameserver.data.sql.impl.ClanTable;
+import com.l2jserver.gameserver.datatables.SkillData;
 import com.l2jserver.gameserver.handler.CommunityBoardHandler;
 import com.l2jserver.gameserver.handler.IWriteBoardHandler;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jserver.gameserver.model.skills.Skill;
 
 /**
  * Buffs board.
@@ -30,7 +34,8 @@ public class BuffsBoard implements IWriteBoardHandler
 {
 	private static final String[] COMMANDS =
 	{
-		"_bbsbuffs"
+		"_bbsbuffs",
+			"_selfbuff"
 	};
 	
 	@Override
@@ -44,8 +49,15 @@ public class BuffsBoard implements IWriteBoardHandler
 	{
 		if (command.equals("_bbsbuffs"))
 		{
-			CommunityBoardHandler.getInstance().addBypass(activeChar, "Buffs", command);
-			CommunityBoardHandler.separateAndSend("<html><body><br><br><center>У вас есть адена: " + activeChar.getAdena() + "</center><br><br></body></html>", activeChar);
+			String html = HtmCache.getInstance().getHtm(activeChar.getHtmlPrefix(), "data/html/CommunityBoard/buffs.html");
+//			html = html.replaceAll("%fav_count%", Integer.toString(getFavoriteCount(activeChar)));
+			CommunityBoardHandler.separateAndSend(html, activeChar);
+
+//			CommunityBoardHandler.getInstance().addBypass(activeChar, "Buffs", command);
+//			CommunityBoardHandler.separateAndSend("<html><body><br><br><center>У вас есть адена: " + activeChar.getAdena() + "</center><br><br></body></html>", activeChar);
+		} else if (command.equals("_selfbuff")) {
+			Skill skill = SkillData.getInstance().getSkill(1363, 1);
+			skill.applyEffects(activeChar, activeChar, true, false, true, 999);
 		} else {
 			CommunityBoardHandler.separateAndSend("<html><body><br><br><center>Command " + command + " need development.</center><br><br></body></html>", activeChar);
 		}
