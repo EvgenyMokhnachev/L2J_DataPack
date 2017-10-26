@@ -19,7 +19,6 @@
 package handlers.communityboard;
 
 import com.l2jserver.gameserver.cache.HtmCache;
-import com.l2jserver.gameserver.data.sql.impl.ClanTable;
 import com.l2jserver.gameserver.datatables.SkillData;
 import com.l2jserver.gameserver.handler.CommunityBoardHandler;
 import com.l2jserver.gameserver.handler.IParseBoardHandler;
@@ -50,6 +49,7 @@ public class BuffsBoard implements IWriteBoardHandler, IParseBoardHandler
 	{
 		if (command.equals("_bbsbuffs"))
 		{
+			LOG.info("Open buffs page");
 			String html = HtmCache.getInstance().getHtm(activeChar.getHtmlPrefix(), "data/html/CommunityBoard/buffs.html");
 //			html = html.replaceAll("%fav_count%", Integer.toString(getFavoriteCount(activeChar)));
 			CommunityBoardHandler.separateAndSend(html, activeChar);
@@ -57,6 +57,7 @@ public class BuffsBoard implements IWriteBoardHandler, IParseBoardHandler
 //			CommunityBoardHandler.getInstance().addBypass(activeChar, "Buffs", command);
 //			CommunityBoardHandler.separateAndSend("<html><body><br><br><center>У вас есть адена: " + activeChar.getAdena() + "</center><br><br></body></html>", activeChar);
 		} else if (command.equals("_selfbuff")) {
+			LOG.info("Click self buff");
 			Skill skill = SkillData.getInstance().getSkill(1363, 1);
 			skill.applyEffects(activeChar, activeChar, true, false, true, 999);
 		} else {
