@@ -59,7 +59,8 @@ public class BuffsBoard implements IWriteBoardHandler, IParseBoardHandler
 		} else if (command.equals("_selfbuff")) {
 			LOG.info("Click self buff");
 			Skill skill = SkillData.getInstance().getSkill(1363, 1);
-			skill.applyEffects(activeChar, activeChar, true, false, true, 999);
+			LOG.info(skill.getName());
+			skill.applyEffects(activeChar, activeChar, true, false, true, 7200);
 		} else {
 			CommunityBoardHandler.separateAndSend("<html><body><br><br><center>Command " + command + " need development.</center><br><br></body></html>", activeChar);
 		}
