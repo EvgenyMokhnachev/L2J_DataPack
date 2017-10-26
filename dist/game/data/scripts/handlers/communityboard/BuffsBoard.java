@@ -49,18 +49,12 @@ public class BuffsBoard implements IWriteBoardHandler, IParseBoardHandler
 	{
 		if (command.equals("_bbsbuffs"))
 		{
-			LOG.info("Open buffs page");
 			String html = HtmCache.getInstance().getHtm(activeChar.getHtmlPrefix(), "data/html/CommunityBoard/buffs.html");
-//			html = html.replaceAll("%fav_count%", Integer.toString(getFavoriteCount(activeChar)));
 			CommunityBoardHandler.separateAndSend(html, activeChar);
-
-//			CommunityBoardHandler.getInstance().addBypass(activeChar, "Buffs", command);
-//			CommunityBoardHandler.separateAndSend("<html><body><br><br><center>У вас есть адена: " + activeChar.getAdena() + "</center><br><br></body></html>", activeChar);
 		} else if (command.equals("_selfbuff")) {
-			LOG.info("Click self buff");
-			Skill skill = SkillData.getInstance().getSkill(1363, 1);
-			LOG.info(skill.getName());
-			skill.applyEffects(activeChar, activeChar);
+			int maxLevel = SkillData.getInstance().getMaxLevel(1362);
+			Skill skill = SkillData.getInstance().getSkill(1363, maxLevel);
+			skill.applyEffects(activeChar, activeChar, true, 14400);
 		} else {
 			CommunityBoardHandler.separateAndSend("<html><body><br><br><center>Command " + command + " need development.</center><br><br></body></html>", activeChar);
 		}
