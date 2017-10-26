@@ -172,14 +172,7 @@ import handlers.chathandlers.ChatPetition;
 import handlers.chathandlers.ChatShout;
 import handlers.chathandlers.ChatTell;
 import handlers.chathandlers.ChatTrade;
-import handlers.communityboard.ClanBoard;
-import handlers.communityboard.FavoriteBoard;
-import handlers.communityboard.FriendsBoard;
-import handlers.communityboard.HomeBoard;
-import handlers.communityboard.HomepageBoard;
-import handlers.communityboard.MailBoard;
-import handlers.communityboard.MemoBoard;
-import handlers.communityboard.RegionBoard;
+import handlers.communityboard.*;
 import handlers.custom.CustomAnnouncePkPvP;
 import handlers.itemhandlers.BeastSoulShot;
 import handlers.itemhandlers.BeastSpiritShot;
@@ -455,6 +448,7 @@ public class MasterHandler
 		{
 			// Community Board
 			ClanBoard.class,
+			BuffsBoard.class,
 			FavoriteBoard.class,
 			FriendsBoard.class,
 			HomeBoard.class,
